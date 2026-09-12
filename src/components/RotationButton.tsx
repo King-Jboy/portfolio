@@ -91,7 +91,7 @@ export const RotationButton: React.FC<RotationButtonProps> = ({
           )}
         </div>
 
-        {/* Arm 2: Pill Fill (White pill background, swings up from -18deg with unblur) */}
+        {/* Arm 2: Pill Fill (Pill background, swings up from -18deg with unblur) */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none transition-all ease-out"
           style={{
@@ -105,10 +105,10 @@ export const RotationButton: React.FC<RotationButtonProps> = ({
               'transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.28s ease-out, filter 0.28s ease-out',
           }}
         >
-          <div className="w-full h-full rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.3)]" />
+          <div className="rotation-pill-bg w-full h-full rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.3)]" />
         </div>
 
-        {/* Arm 3: Inverted Text (Pitch black text on white pill, swings up from -35deg, scale 0.6 -> 1) */}
+        {/* Arm 3: Inverted Text (Swings up from -35deg, scale 0.6 -> 1) */}
         <div
           className="absolute inset-0 flex items-center justify-center gap-1.5 px-3.5 pointer-events-none transition-all ease-out"
           style={{
@@ -121,13 +121,13 @@ export const RotationButton: React.FC<RotationButtonProps> = ({
               'transform 0.48s cubic-bezier(0.25, 1.4, 0.5, 1) 0.025s, opacity 0.22s ease-out 0.025s',
           }}
         >
-          <span className="text-xs font-semibold text-[#050507]">
+          <span className="rotation-pill-text text-xs font-semibold text-[#050507]">
             {title}
           </span>
           {invertedIcon ? (
-            <span className="text-[#050507] shrink-0">{invertedIcon}</span>
+            <span className="rotation-pill-icon text-[#050507] shrink-0">{invertedIcon}</span>
           ) : icon ? (
-            <span className="text-[#050507] shrink-0">{icon}</span>
+            <span className="rotation-pill-icon text-[#050507] shrink-0">{icon}</span>
           ) : null}
         </div>
       </div>

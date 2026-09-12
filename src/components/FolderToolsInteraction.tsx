@@ -301,7 +301,7 @@ export const FolderToolsInteraction: React.FC = () => {
                     transition: 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 250ms ease',
                     cursor: 'grab',
                   }}
-                  className="rounded-[14px] p-4 flex flex-col justify-between border select-none border-white/[0.09] shadow-[2px_-2px_14px_rgba(0,0,0,0.55)] hover:border-white/30"
+                  className="folder-tool-card rounded-[14px] p-4 flex flex-col justify-between border select-none border-white/[0.09] shadow-[2px_-2px_14px_rgba(0,0,0,0.55)] hover:border-white/30"
                 >
                   {/* Card Header */}
                   <div>

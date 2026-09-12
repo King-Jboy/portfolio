@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { RotationButton } from './RotationButton';
+import { ThemeToggle } from './ThemeSwitcher';
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -32,31 +33,38 @@ export const Navbar: React.FC = () => {
           <span className="text-zinc-500 font-normal ml-2">/ cybersecurity</span>
         </a>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1 sm:gap-1.5 p-1 rounded-full bg-white/[0.03] border border-white/[0.06] backdrop-blur-md">
-          <RotationButton title="Focus" href="#focus" />
-          <RotationButton title="Engineering" href="#work" />
-          <RotationButton title="About" href="#about" />
-          <RotationButton title="Contact" href="#contact" />
-          <RotationButton
-            title="GitHub"
-            href="https://github.com/King-Jboy/"
-            target="_blank"
-            rel="noopener noreferrer"
-            icon={<ArrowUpRight className="w-3 h-3" />}
-            invertedIcon={<ArrowUpRight className="w-3 h-3 text-[#050507]" />}
-          />
-        </nav>
+        {/* Desktop Navigation & Theme Switcher on the right */}
+        <div className="hidden md:flex items-center gap-2 sm:gap-2.5">
+          <nav className="flex items-center gap-1 sm:gap-1.5 p-1 rounded-full bg-white/[0.03] border border-white/[0.06] backdrop-blur-md">
+            <RotationButton title="Focus" href="#focus" />
+            <RotationButton title="Engineering" href="#work" />
+            <RotationButton title="About" href="#about" />
+            <RotationButton title="Contact" href="#contact" />
+            <RotationButton
+              title="GitHub"
+              href="https://github.com/King-Jboy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              icon={<ArrowUpRight className="w-3 h-3" />}
+              invertedIcon={<ArrowUpRight className="w-3 h-3 text-[#050507]" />}
+            />
+          </nav>
 
-        {/* Mobile menu button */}
-        <button
-          type="button"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-zinc-400 hover:text-white focus:outline-none rounded-lg border border-white/[0.06] bg-white/[0.02]"
-          aria-label="Toggle navigation menu"
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+          <ThemeToggle />
+        </div>
+
+        {/* Mobile Actions: Theme Toggle + Menu Hamburger */}
+        <div className="flex md:hidden items-center gap-2">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-zinc-400 hover:text-white focus:outline-none rounded-lg border border-white/[0.06] bg-white/[0.02]"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

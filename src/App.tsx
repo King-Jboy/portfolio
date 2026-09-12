@@ -10,7 +10,7 @@ import { IntroSignature } from './components/IntroSignature';
 
 export const App: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-[#060709] text-[#ededed] font-sans selection:bg-white/20 selection:text-white">
+    <div className="portfolio-app-root relative min-h-screen bg-[#060709] text-[#ededed] font-sans selection:bg-white/20 selection:text-white transition-colors duration-300">
       <IntroSignature />
       <Navbar />
       <main id="main-content">

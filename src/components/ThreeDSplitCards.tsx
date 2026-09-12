@@ -268,7 +268,7 @@ export const ThreeDSplitCards: React.FC = () => {
             textSecondary = 'text-blue-100/90';
             tagStyle = 'bg-white/10 text-white border border-white/15';
           } else {
-            cardStyle = 'bg-[#111217] text-white shadow-2xl shadow-black/80 border border-white/[0.09]';
+            cardStyle = 'split-card-dark bg-[#111217] text-white shadow-2xl shadow-black/80 border border-white/[0.09]';
             textSecondary = 'text-zinc-400';
             tagStyle = 'bg-white/[0.04] text-zinc-300 border border-white/[0.07]';
           }

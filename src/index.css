@@ -90,3 +90,191 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ----------------------------------------------------
+ * Theme Switching: Framer ThemeSwitcher-wn9byP.js spec
+ * ---------------------------------------------------- */
+html[toggle-theme="dark"],
+body[toggle-theme="dark"] {
+  color-scheme: dark;
+  --bg-primary: #060709;
+  --bg-secondary: #090a0d;
+  --bg-card: #0b0c10;
+  --text-primary: #ededed;
+  --text-secondary: #a1a1aa;
+}
+
+html[toggle-theme="light"],
+body[toggle-theme="light"] {
+  color-scheme: light;
+  --bg-primary: #fcfcfd;
+  --bg-secondary: #f4f4f7;
+  --bg-card: #ffffff;
+  --text-primary: #09090b;
+  --text-secondary: #52525b;
+}
+
+/* Base Light Mode Styles */
+html[toggle-theme="light"] body,
+html[toggle-theme="light"] .portfolio-app-root {
+  background-color: #fcfcfd !important;
+  color: #09090b !important;
+}
+
+/* Background Overrides */
+html[toggle-theme="light"] .bg-\[\#060709\] {
+  background-color: #fcfcfd !important;
+}
+
+html[toggle-theme="light"] .bg-\[\#050507\]\/80 {
+  background-color: rgba(252, 252, 253, 0.88) !important;
+}
+
+html[toggle-theme="light"] .bg-\[\#090a0d\],
+html[toggle-theme="light"] .bg-\[\#090a0e\] {
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+html[toggle-theme="light"] .bg-\[\#0b0c10\] {
+  background-color: #f8fafc !important;
+}
+
+/* Text Overrides */
+html[toggle-theme="light"] .text-white {
+  color: #09090b !important;
+}
+
+html[toggle-theme="light"] .text-\[\#ededed\] {
+  color: #09090b !important;
+}
+
+html[toggle-theme="light"] .text-zinc-200,
+html[toggle-theme="light"] .text-zinc-300 {
+  color: #27272a !important;
+}
+
+html[toggle-theme="light"] .text-zinc-400 {
+  color: #52525b !important;
+}
+
+html[toggle-theme="light"] .text-zinc-500 {
+  color: #71717a !important;
+}
+
+/* Border Overrides */
+html[toggle-theme="light"] [class*="border-white\/"] {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+html[toggle-theme="light"] .border-white\/10,
+html[toggle-theme="light"] .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Subtle background fills */
+html[toggle-theme="light"] [class*="bg-white\/\[0\.02\]"],
+html[toggle-theme="light"] [class*="bg-white\/\[0\.03\]"],
+html[toggle-theme="light"] [class*="bg-white\/\[0\.04\]"] {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+html[toggle-theme="light"] [class*="bg-white\/\[0\.05\]"],
+html[toggle-theme="light"] [class*="bg-white\/\[0\.06\]"],
+html[toggle-theme="light"] [class*="bg-white\/\[0\.08\]"] {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+html[toggle-theme="light"] [class*="hover\:bg-white\/"]:hover {
+  background-color: rgba(0, 0, 0, 0.07) !important;
+}
+
+/* Navigation Pill Text in Light Mode */
+html[toggle-theme="light"] nav .text-zinc-300 {
+  color: #3f3f46 !important;
+}
+
+html[toggle-theme="light"] nav .text-zinc-400 {
+  color: #71717a !important;
+}
+
+/* Rotation Button styling in Light Mode */
+html[toggle-theme="light"] .rotation-pill-bg {
+  background-color: #18181b !important;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+html[toggle-theme="light"] .rotation-pill-text {
+  color: #ffffff !important;
+}
+
+html[toggle-theme="light"] .rotation-pill-icon {
+  color: #ffffff !important;
+}
+
+/* 3D Folder Tool Cards in Light Mode */
+html[toggle-theme="light"] .folder-tool-card {
+  background-color: #ffffff !important;
+  box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+html[toggle-theme="light"] .folder-tool-card p,
+html[toggle-theme="light"] .folder-tool-card span {
+  color: #3f3f46;
+}
+
+/* Robotics card: grey only in light mode */
+html[toggle-theme="light"] .split-card-dark {
+  background-color: #d1d5db !important;
+  color: #111827 !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+html[toggle-theme="light"] .split-card-dark .text-zinc-400 {
+  color: #52525b !important;
+}
+
+html[toggle-theme="light"] .split-card-dark .text-zinc-300 {
+  color: #71717a !important;
+}
+
+/* Tag pills on dark split card in light mode */
+html[toggle-theme="light"] .split-card-dark .bg-white\/\[0\.04\] {
+  background-color: rgba(0, 0, 0, 0.07) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #3f3f46 !important;
+}
+
+html[toggle-theme="light"] .split-card-dark .text-white {
+  color: #111827 !important;
+}
+
+/* About Section Flashlight in Light Mode */
+html[toggle-theme="light"] #about .text-\[\#484a52\] {
+  color: #a1a1aa !important;
+}
+
+html[toggle-theme="light"] #about .text-zinc-600 {
+  color: #a1a1aa !important;
+}
+
+/* Selection and Scrollbar in Light Mode */
+html[toggle-theme="light"] ::selection {
+  background-color: rgba(56, 189, 248, 0.25);
+  color: #09090b;
+}
+
+html[toggle-theme="light"] ::-webkit-scrollbar-track {
+  background: #fcfcfd;
+}
+
+html[toggle-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+}
+
+html[toggle-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa;
+}
+

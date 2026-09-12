@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { LinuxIcon, PythonIcon, ClaudeIcon, DeepseekIcon } from './Icons';
+import { LinuxIcon, PythonIcon, ClaudeIcon, DeepseekIcon, GeminiIcon } from './Icons';
 import { Folder as FolderIcon } from 'lucide-react';
 
 interface ToolItem {
@@ -35,7 +35,7 @@ const TOOLS: ToolItem[] = [
     icon: PythonIcon,
     accent: '#fbbf24',
     badge: 'SCRIPT // 02',
-    defaultRotate: -1.5,
+    defaultRotate: -2,
   },
   {
     id: 'claude',
@@ -47,7 +47,18 @@ const TOOLS: ToolItem[] = [
     icon: ClaudeIcon,
     accent: '#f97316',
     badge: 'AI.CLI // 03',
-    defaultRotate: 1.5,
+    defaultRotate: 0,
+  },
+  {
+    id: 'gemini',
+    title: 'Google Gemini / Antigravity',
+    subtitle: 'Agentic Workflows & IDE',
+    description:
+      'Pair programming and autonomous agent architectures using Google Antigravity, Gemini 1.5/2.0 multimodal reasoning, and tool automation.',
+    icon: GeminiIcon,
+    accent: '#818cf8',
+    badge: 'AGENT // 04',
+    defaultRotate: 2,
   },
   {
     id: 'deepseek',
@@ -57,7 +68,7 @@ const TOOLS: ToolItem[] = [
       'Hands-on experimentation with open-weight models, reasoning benchmarks, and evaluation harness scripts.',
     icon: DeepseekIcon,
     accent: '#34d399',
-    badge: 'EVAL // 04',
+    badge: 'EVAL // 05',
     defaultRotate: 4,
   },
 ];
@@ -86,23 +97,24 @@ export const FolderToolsInteraction: React.FC = () => {
   const getBaseCoords = useCallback(
     (index: number, open: boolean, mobile: boolean) => {
       if (!open) {
-        return { x: 0, y: 0, rot: isHovered ? TOOLS[index].defaultRotate * 1.6 : TOOLS[index].defaultRotate };
+        return { x: 0, y: 0, rot: isHovered ? TOOLS[index].defaultRotate * 1.5 : TOOLS[index].defaultRotate };
       }
       if (mobile) {
-        // Mobile fan spread
-        const xOffsets = [-48, -16, 16, 48];
+        // Mobile fan spread (5 cards)
+        const xOffsets = [-56, -28, 0, 28, 56];
         return {
-          x: xOffsets[index],
-          y: index % 2 === 0 ? -12 : 8,
-          rot: (index - 1.5) * 3,
+          x: xOffsets[index] ?? 0,
+          y: index % 2 === 0 ? -10 : 8,
+          rot: (index - 2) * 3,
         };
       }
-      // Desktop fan spread
-      const xOffsets = [-165, -55, 55, 165];
+      // Desktop fan spread (5 cards)
+      const xOffsets = [-190, -95, 0, 95, 190];
+      const yOffsets = [-8, -22, -30, -22, -8];
       return {
-        x: xOffsets[index],
-        y: index === 0 || index === 3 ? -10 : -25,
-        rot: (index - 1.5) * 4,
+        x: xOffsets[index] ?? 0,
+        y: yOffsets[index] ?? -15,
+        rot: (index - 2) * 3.5,
       };
     },
     [isHovered]
@@ -207,8 +219,8 @@ export const FolderToolsInteraction: React.FC = () => {
         className="relative flex flex-col items-center justify-center transition-all duration-500"
         style={{
           width: '100%',
-          maxWidth: isOpen ? '840px' : '320px',
-          minHeight: isOpen ? (isMobile ? '400px' : '340px') : '224px',
+          maxWidth: isOpen ? '920px' : '320px',
+          minHeight: isOpen ? (isMobile ? '420px' : '350px') : '224px',
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -245,7 +257,7 @@ export const FolderToolsInteraction: React.FC = () => {
             {/* Top Folder Tab Header */}
             <div className="absolute -top-3.5 left-4 px-3 py-0.5 rounded-t-lg bg-[#242424] border-t border-x border-[#333] text-[10px] font-mono text-zinc-400 flex items-center gap-1.5">
               <FolderIcon className="w-3 h-3 text-zinc-400" />
-              <span>STACK // 04_TOOLS</span>
+              <span>STACK // 05_TOOLS</span>
             </div>
           </div>
 

@@ -132,28 +132,11 @@ export const ThreeDSplitCards: React.FC = () => {
   };
 
   return (
-    <div className="w-full py-4 select-none">
-      {/* Mobile selector tabs */}
-      <div className="sm:hidden flex items-center justify-center gap-2 mb-6">
-        {CARDS.map((card, idx) => (
-          <button
-            key={card.id}
-            type="button"
-            onClick={() => setMobileActive(idx)}
-            className={`px-3 py-1.5 rounded-full text-xs transition-all ${
-              mobileActive === idx
-                ? 'bg-white text-black font-medium shadow-md scale-105'
-                : 'text-zinc-400 bg-white/[0.04] border border-white/[0.06]'
-            }`}
-          >
-            {card.title.split(' ')[0]}
-          </button>
-        ))}
-      </div>
+    <div className="w-full py-1 sm:py-4 select-none">
 
       {/* 3D Split Canvas with Swipe Support */}
       <div
-        className="relative flex items-center justify-center min-h-[430px] sm:min-h-[470px] cursor-grab active:cursor-grabbing"
+        className="relative flex items-center justify-center min-h-[375px] sm:min-h-[470px] cursor-grab active:cursor-grabbing"
         style={{
           perspective: '1200px',
           touchAction: 'pan-y', // allows vertical scroll while intercepting horizontal swipe
@@ -311,21 +294,6 @@ export const ThreeDSplitCards: React.FC = () => {
             </div>
           );
         })}
-      </div>
-
-      {/* Mobile pagination dots */}
-      <div className="sm:hidden flex items-center justify-center gap-2 mt-4">
-        {CARDS.map((card, idx) => (
-          <button
-            key={card.id}
-            type="button"
-            onClick={() => setMobileActive(idx)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              mobileActive === idx ? 'w-6 bg-cyan-400' : 'w-1.5 bg-white/20'
-            }`}
-            aria-label={`Go to ${card.title}`}
-          />
-        ))}
       </div>
     </div>
   );

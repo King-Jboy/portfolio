@@ -6,12 +6,12 @@ interface AboutContentProps {
 
 const AboutContent: React.FC<AboutContentProps> = ({ illuminated = false }) => {
   return (
-    <div className="py-14 sm:py-24 px-6 max-w-5xl mx-auto">
+    <div className="py-10 sm:py-24 px-4 sm:px-6 max-w-5xl mx-auto">
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 mb-8 sm:mb-14">
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 sm:gap-3 mb-5 sm:mb-14">
         <div>
           <h2
-            className={`text-2xl sm:text-3xl font-semibold tracking-tight transition-colors duration-300 ${
+            className={`text-xl sm:text-3xl font-semibold tracking-tight transition-colors duration-300 ${
               illuminated
                 ? 'text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.65)]'
                 : 'text-zinc-600'
@@ -29,43 +29,56 @@ const AboutContent: React.FC<AboutContentProps> = ({ illuminated = false }) => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-start">
         {/* Left Column: Honest Personal Narrative */}
         <div
-          className={`md:col-span-7 space-y-5 text-sm sm:text-base leading-relaxed font-normal transition-colors duration-300 ${
+          className={`md:col-span-7 space-y-3.5 sm:space-y-5 text-sm sm:text-base leading-relaxed font-normal transition-colors duration-300 ${
             illuminated
               ? 'text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.25)]'
               : 'text-[#484a52]'
           }`}
         >
-          <p>
-            I'm an 18-year-old student currently in my 200 level (second year) studying Cybersecurity at Babcock University in Nigeria.
-          </p>
-          <p>
-            I got into university in 2025. I've always had a natural curiosity about how computers and networks operate, so choosing cybersecurity felt like the right path. Right now, I'm taking things step-by-step: building strong foundational habits, getting comfortable in Linux, writing scripts in Python, and understanding how data moves across networks.
-          </p>
-          <p>
-            I'm definitely at the start of my journey rather than having years of deep expertise. What I bring is curiosity, a strong work ethic, and a genuine drive to learn ethical hacking, penetration testing, and robotics &amp; AI engineering as I progress through my degree.
-          </p>
+          {/* Mobile concise narrative */}
+          <div className="sm:hidden space-y-3">
+            <p>
+              I'm an 18-year-old student in my second year (200 level) studying Cybersecurity at Babcock University in Nigeria.
+            </p>
+            <p>
+              Right now, I'm building strong fundamentals&mdash;comfortable in Linux, writing automation scripts in Python, understanding computer networks, and actively exploring ethical hacking, penetration testing, and robotics.
+            </p>
+          </div>
+
+          {/* Desktop full narrative (untouched) */}
+          <div className="hidden sm:block space-y-5">
+            <p>
+              I'm an 18-year-old student currently in my 200 level (second year) studying Cybersecurity at Babcock University in Nigeria.
+            </p>
+            <p>
+              I got into university in 2025. I've always had a natural curiosity about how computers and networks operate, so choosing cybersecurity felt like the right path. Right now, I'm taking things step-by-step: building strong foundational habits, getting comfortable in Linux, writing scripts in Python, and understanding how data moves across networks.
+            </p>
+            <p>
+              I'm definitely at the start of my journey rather than having years of deep expertise. What I bring is curiosity, a strong work ethic, and a genuine drive to learn ethical hacking, penetration testing, and robotics &amp; AI engineering as I progress through my degree.
+            </p>
+          </div>
         </div>
 
         {/* Right Column: Key Details */}
-        <div className="md:col-span-5 space-y-6 text-xs">
+        <div className="md:col-span-5 space-y-4 sm:space-y-6 text-xs pt-1 sm:pt-0">
           {/* Education block */}
           <div
-            className={`pb-5 border-b transition-colors duration-300 ${
+            className={`pb-3.5 sm:pb-5 border-b transition-colors duration-300 ${
               illuminated ? 'border-white/20' : 'border-white/[0.04]'
             }`}
           >
             <span
-              className={`uppercase tracking-wider block mb-2 font-medium transition-colors duration-300 ${
+              className={`uppercase tracking-wider block mb-1 sm:mb-2 font-medium transition-colors duration-300 ${
                 illuminated ? 'text-zinc-400' : 'text-zinc-600'
               }`}
             >
               Education
             </span>
             <div
-              className={`text-sm font-semibold mb-1 transition-colors duration-300 ${
+              className={`text-sm font-semibold mb-0.5 sm:mb-1 transition-colors duration-300 ${
                 illuminated
                   ? 'text-white drop-shadow-[0_0_14px_rgba(255,255,255,0.45)]'
                   : 'text-zinc-500'
@@ -81,7 +94,7 @@ const AboutContent: React.FC<AboutContentProps> = ({ illuminated = false }) => {
               B.Sc. Cybersecurity &middot; 200 Level Undergraduate
             </div>
             <div
-              className={`mt-1 transition-colors duration-300 ${
+              className={`mt-0.5 sm:mt-1 transition-colors duration-300 ${
                 illuminated ? 'text-zinc-400' : 'text-zinc-700'
               }`}
             >
@@ -91,19 +104,19 @@ const AboutContent: React.FC<AboutContentProps> = ({ illuminated = false }) => {
 
           {/* Certification block */}
           <div
-            className={`pb-5 border-b transition-colors duration-300 ${
+            className={`pb-3.5 sm:pb-5 border-b transition-colors duration-300 ${
               illuminated ? 'border-white/20' : 'border-white/[0.04]'
             }`}
           >
             <span
-              className={`uppercase tracking-wider block mb-2 font-medium transition-colors duration-300 ${
+              className={`uppercase tracking-wider block mb-1 sm:mb-2 font-medium transition-colors duration-300 ${
                 illuminated ? 'text-zinc-400' : 'text-zinc-600'
               }`}
             >
               Certification
             </span>
             <div
-              className={`text-sm font-semibold mb-1 transition-colors duration-300 ${
+              className={`text-sm font-semibold mb-0.5 sm:mb-1 transition-colors duration-300 ${
                 illuminated
                   ? 'text-white drop-shadow-[0_0_14px_rgba(255,255,255,0.45)]'
                   : 'text-zinc-500'
@@ -116,14 +129,14 @@ const AboutContent: React.FC<AboutContentProps> = ({ illuminated = false }) => {
                 illuminated ? 'text-zinc-300' : 'text-zinc-600'
               }`}
             >
-              Completed introductory coursework covering fundamentals of accelerated computing and deep learning.
+              Accelerated computing and deep learning fundamentals.
             </div>
           </div>
 
           {/* Attitude */}
           <div>
             <span
-              className={`uppercase tracking-wider block mb-2 font-medium transition-colors duration-300 ${
+              className={`uppercase tracking-wider block mb-1 sm:mb-2 font-medium transition-colors duration-300 ${
                 illuminated ? 'text-zinc-400' : 'text-zinc-600'
               }`}
             >
@@ -134,7 +147,7 @@ const AboutContent: React.FC<AboutContentProps> = ({ illuminated = false }) => {
                 illuminated ? 'text-zinc-300' : 'text-zinc-600'
               }`}
             >
-              Humble about what I don't know yet, curious about how things work, and eager to learn through labs, books, and code.
+              Curious about how systems work, and learning through labs, books, and code.
             </p>
           </div>
         </div>

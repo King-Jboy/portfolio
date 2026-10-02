@@ -221,37 +221,25 @@ export const ThreeDSplitCards: React.FC = () => {
           // Mobile transforms with live swipe drag physics
           let mobileTransform = '';
           let mobileZIndex = 10;
-          const liveX = isMobileActive ? dragOffset * 0.85 : (dragOffset * 0.25);
-          const liveRotate = isMobileActive ? dragOffset * 0.08 : 0;
+          let mobileOpacity = 1;
+          const liveX = isMobileActive ? dragOffset * 0.85 : dragOffset * 0.25;
+          const liveRotate = isMobileActive ? dragOffset * 0.06 : 0;
+          const diff = index - mobileActive;
 
-          if (index === 0) {
-            if (isMobileActive) {
-              mobileTransform = `translateX(${liveX}px) translateY(-12px) rotate(${liveRotate}deg) scale(1.03)`;
-              mobileZIndex = 30;
-            } else {
-              const basePos = mobileActive === 1 ? -70 : -100;
-              mobileTransform = `translateX(${basePos + liveX}px) translateY(12px) rotate(-8deg) scale(0.91)`;
-              mobileZIndex = 10;
-            }
-          } else if (index === 1) {
-            if (isMobileActive) {
-              mobileTransform = `translateX(${liveX}px) translateY(-12px) rotate(${liveRotate}deg) scale(1.03)`;
-              mobileZIndex = 30;
-            } else {
-              const basePos = mobileActive === 0 ? 70 : -70;
-              const baseRot = mobileActive === 0 ? 6 : -6;
-              mobileTransform = `translateX(${basePos + liveX}px) translateY(14px) rotate(${baseRot}deg) scale(0.91)`;
-              mobileZIndex = 15;
-            }
+          if (diff === 0) {
+            mobileTransform = `translateX(${liveX}px) translateY(-8px) rotate(${liveRotate}deg) scale(1)`;
+            mobileZIndex = 30;
+            mobileOpacity = 1;
+          } else if (diff === -1 || (mobileActive === 2 && index === 0)) {
+            const offsetX = -22 + liveX;
+            mobileTransform = `translateX(${offsetX}px) translateY(8px) rotate(-3.5deg) scale(0.92)`;
+            mobileZIndex = 15;
+            mobileOpacity = 0.65;
           } else {
-            if (isMobileActive) {
-              mobileTransform = `translateX(${liveX}px) translateY(-12px) rotate(${liveRotate}deg) scale(1.03)`;
-              mobileZIndex = 30;
-            } else {
-              const basePos = mobileActive === 1 ? 70 : 100;
-              mobileTransform = `translateX(${basePos + liveX}px) translateY(12px) rotate(8deg) scale(0.91)`;
-              mobileZIndex = 10;
-            }
+            const offsetX = 22 + liveX;
+            mobileTransform = `translateX(${offsetX}px) translateY(8px) rotate(3.5deg) scale(0.92)`;
+            mobileZIndex = 15;
+            mobileOpacity = 0.65;
           }
 
           // Theme styling matching reference
@@ -289,11 +277,12 @@ export const ThreeDSplitCards: React.FC = () => {
               style={{
                 transform: activeTransform,
                 zIndex: activeZIndex,
+                opacity: isMobile ? mobileOpacity : 1,
                 transition: isDragging
                   ? 'none'
-                  : 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 450ms ease',
+                  : 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1), opacity 400ms ease, box-shadow 450ms ease',
               }}
-              className={`absolute w-[270px] sm:w-[305px] md:w-[325px] h-[375px] sm:h-[415px] p-6 sm:p-7 rounded-3xl flex flex-col justify-between cursor-pointer ${cardStyle}`}
+              className={`absolute w-[calc(100vw-64px)] max-w-[305px] sm:w-[305px] md:w-[325px] h-[360px] sm:h-[415px] p-5 sm:p-7 rounded-3xl flex flex-col justify-between cursor-pointer ${cardStyle}`}
             >
               <div>
                 <div className="w-10 h-10 rounded-full flex items-center justify-center mb-8 sm:mb-10">

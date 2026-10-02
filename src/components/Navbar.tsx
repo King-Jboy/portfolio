@@ -27,10 +27,10 @@ export const Navbar: React.FC = () => {
         {/* Author / Identity */}
         <a
           href="#"
-          className="text-sm font-medium tracking-tight text-white hover:text-zinc-300 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-white"
+          className="text-sm font-medium tracking-tight text-white hover:text-zinc-300 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-white truncate mr-2"
         >
           <span>Maduabuna Josiah</span>
-          <span className="text-zinc-500 font-normal ml-2">/ cybersecurity</span>
+          <span className="text-zinc-500 font-normal ml-2 hidden sm:inline">/ cybersecurity</span>
         </a>
 
         {/* Desktop Navigation & Theme Switcher on the right */}

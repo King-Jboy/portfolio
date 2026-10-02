@@ -56,17 +56,17 @@ export const ContactSection: React.FC = () => {
       {/* Main Email Block */}
       <div className="mb-14 pb-12 border-b border-white/[0.08]">
         <div className="text-xs text-zinc-500 mb-2">Direct Email</div>
-        <div className="flex flex-wrap items-baseline gap-4 mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-baseline gap-3 sm:gap-4 mb-4">
           <a
             href={`mailto:${email}`}
-            className="text-2xl sm:text-4xl font-mono font-medium text-white hover:text-zinc-300 transition-colors"
+            className="text-lg xs:text-xl sm:text-3xl md:text-4xl font-mono font-medium text-white hover:text-zinc-300 transition-colors break-all sm:break-normal"
           >
             {email}
           </a>
           <button
             type="button"
             onClick={handleCopy}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs text-zinc-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-colors btn-press"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs text-zinc-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-colors btn-press self-start"
           >
             {copied ? (
               <>
@@ -89,7 +89,7 @@ export const ContactSection: React.FC = () => {
       {/* Channels List and Cursive Signature */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-1">
         {/* Left: Verified Channels */}
-        <div className="flex flex-wrap items-start gap-6 sm:gap-8">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-start gap-6 sm:gap-8">
           {channels.map((ch) => {
             const Icon = ch.icon;
             return (

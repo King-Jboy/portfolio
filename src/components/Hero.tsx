@@ -17,7 +17,7 @@ export const Hero: React.FC = () => {
           </span>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.035em] text-white leading-[1.08] mb-8">
+        <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-[-0.035em] text-white leading-[1.12] sm:leading-[1.08] mb-6 sm:mb-8">
           <TextScramble text="Learning cybersecurity," delay={0.15} duration={1.1} />
           <br />
           <TextScramble text="one system at a time." delay={0.45} duration={1.1} />
@@ -74,10 +74,10 @@ export const Hero: React.FC = () => {
         </LineMaskSplit>
 
         {/* Action buttons */}
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
           <a
             href="#focus"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-white text-black text-xs font-medium hover:bg-zinc-200 transition-colors btn-press"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-md bg-white text-black text-xs font-medium hover:bg-zinc-200 transition-colors btn-press text-center"
           >
             <span>What I'm Learning</span>
             <ArrowDown className="w-3.5 h-3.5 text-zinc-700" />
@@ -85,7 +85,7 @@ export const Hero: React.FC = () => {
 
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-white/[0.05] hover:bg-white/[0.09] text-xs font-medium text-zinc-200 border border-white/10 transition-colors btn-press"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-md bg-white/[0.05] hover:bg-white/[0.09] text-xs font-medium text-zinc-200 border border-white/10 transition-colors btn-press text-center"
           >
             <span>Get in touch</span>
           </a>

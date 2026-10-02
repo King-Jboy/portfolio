@@ -146,6 +146,7 @@ const AboutContent: React.FC<AboutContentProps> = ({ illuminated = false }) => {
 export const AboutSection: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const posRef = useRef({
     x: 200,
     y: 120,
@@ -153,6 +154,15 @@ export const AboutSection: React.FC = () => {
     targetY: 120,
     active: false,
   });
+
+  useEffect(() => {
+    const check = () => {
+      setIsMobile(window.innerWidth < 768 || window.matchMedia('(hover: none)').matches);
+    };
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   // RAF loop for buttery-smooth physical spring motion
   useEffect(() => {
@@ -258,23 +268,25 @@ export const AboutSection: React.FC = () => {
         }}
       />
 
-      {/* 3. Base Content Layer (Dark Unlit Room, fully accessible and selectable) */}
+      {/* 3. Base Content Layer (Fully bright on mobile, dark unlit on desktop for spotlight) */}
       <div className="relative z-0">
-        <AboutContent illuminated={false} />
+        <AboutContent illuminated={isMobile} />
       </div>
 
-      {/* 4. Illuminated Content Layer (Flashlight Mask Overlay) */}
-      <div
-        className="pointer-events-none select-none absolute inset-0 transition-opacity duration-500 ease-out z-10"
-        style={{
-          opacity: isHovered ? 1 : 0.3,
-          WebkitMaskImage: `radial-gradient(310px circle at var(--spotlight-x) var(--spotlight-y), black 0%, black 25%, rgba(0, 0, 0, 0.5) 60%, transparent 100%)`,
-          maskImage: `radial-gradient(310px circle at var(--spotlight-x) var(--spotlight-y), black 0%, black 25%, rgba(0, 0, 0, 0.5) 60%, transparent 100%)`,
-        }}
-        aria-hidden="true"
-      >
-        <AboutContent illuminated={true} />
-      </div>
+      {/* 4. Illuminated Content Layer (Flashlight Mask Overlay - Desktop only) */}
+      {!isMobile && (
+        <div
+          className="pointer-events-none select-none absolute inset-0 transition-opacity duration-500 ease-out z-10"
+          style={{
+            opacity: isHovered ? 1 : 0.3,
+            WebkitMaskImage: `radial-gradient(310px circle at var(--spotlight-x) var(--spotlight-y), black 0%, black 25%, rgba(0, 0, 0, 0.5) 60%, transparent 100%)`,
+            maskImage: `radial-gradient(310px circle at var(--spotlight-x) var(--spotlight-y), black 0%, black 25%, rgba(0, 0, 0, 0.5) 60%, transparent 100%)`,
+          }}
+          aria-hidden="true"
+        >
+          <AboutContent illuminated={true} />
+        </div>
+      )}
     </section>
   );
 };

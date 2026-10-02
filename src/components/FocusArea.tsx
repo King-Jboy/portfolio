@@ -38,9 +38,9 @@ export const FocusArea: React.FC = () => {
 
       {/* Secondary Exploratory Topics */}
       <div className="mb-6 sm:mb-7">
-        <div className="flex flex-wrap items-baseline gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-2">
           <h3 className="text-sm sm:text-base font-medium text-white">
-            Other topics covered in coursework &amp; self-study:
+            Other topics in coursework &amp; self-study:
           </h3>
           <FlipTextCycle
             texts={broaderExploration.map((topic) => ({

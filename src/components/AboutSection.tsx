@@ -129,7 +129,8 @@ const AboutContent: React.FC<AboutContentProps> = ({ illuminated = false }) => {
                 illuminated ? 'text-zinc-300' : 'text-zinc-600'
               }`}
             >
-              Accelerated computing and deep learning fundamentals.
+              <span className="sm:hidden">Accelerated computing and deep learning fundamentals.</span>
+              <span className="hidden sm:inline">Completed introductory coursework covering fundamentals of accelerated computing and deep learning.</span>
             </div>
           </div>
 
@@ -147,7 +148,8 @@ const AboutContent: React.FC<AboutContentProps> = ({ illuminated = false }) => {
                 illuminated ? 'text-zinc-300' : 'text-zinc-600'
               }`}
             >
-              Curious about how systems work, and learning through labs, books, and code.
+              <span className="sm:hidden">Curious about how systems work, and learning through labs, books, and code.</span>
+              <span className="hidden sm:inline">Humble about what I don't know yet, curious about how things work, and eager to learn through labs, books, and code.</span>
             </p>
           </div>
         </div>

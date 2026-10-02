@@ -56,13 +56,13 @@ export const FocusArea: React.FC = () => {
       </div>
 
       {/* Tools I Work With Right Now - Framer 3D Folder Interaction */}
-      <div className="pt-2 sm:pt-4">
-        <h3 className="text-sm sm:text-base font-medium text-white">
+      <div className="pt-4 sm:pt-6">
+        <h3 className="text-sm sm:text-base font-medium text-white mb-2">
           Tools I work with right now
         </h3>
 
-        {/* Vertically centered with compact mobile padding */}
-        <div className="py-5 sm:py-20 flex items-center justify-center">
+        {/* Shifted down with proper top clearance so cards never overlap the heading */}
+        <div className="pt-12 sm:pt-16 pb-6 sm:pb-20 flex items-center justify-center">
           <FolderToolsInteraction />
         </div>
       </div>

@@ -61,8 +61,8 @@ export const FocusArea: React.FC = () => {
           Tools I work with right now
         </h3>
 
-        {/* Vertically centered between heading and bottom hr line */}
-        <div className="py-14 sm:py-20 flex items-center justify-center">
+        {/* Vertically centered with compact mobile padding */}
+        <div className="py-5 sm:py-20 flex items-center justify-center">
           <FolderToolsInteraction />
         </div>
       </div>

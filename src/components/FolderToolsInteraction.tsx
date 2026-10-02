@@ -77,7 +77,6 @@ export const FolderToolsInteraction: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [mobileActiveTool, setMobileActiveTool] = useState(0);
 
   // Stored offsets when not dragging
   const [cardOffsets, setCardOffsets] = useState<Record<string, { x: number; y: number }>>({});
@@ -101,12 +100,12 @@ export const FolderToolsInteraction: React.FC = () => {
         return { x: 0, y: 0, rot: isHovered ? TOOLS[index].defaultRotate * 1.5 : TOOLS[index].defaultRotate };
       }
       if (mobile) {
-        // Mobile fan spread (5 cards)
-        const xOffsets = [-56, -28, 0, 28, 56];
+        // Compact mobile fan spread (5 cards)
+        const xOffsets = [-48, -24, 0, 24, 48];
         return {
           x: xOffsets[index] ?? 0,
-          y: index % 2 === 0 ? -10 : 8,
-          rot: (index - 2) * 3,
+          y: index % 2 === 0 ? -8 : 6,
+          rot: (index - 2) * 2.8,
         };
       }
       // Desktop fan spread (5 cards)
@@ -132,7 +131,7 @@ export const FolderToolsInteraction: React.FC = () => {
     }
   };
 
-  // Ultra-stable pointer drag using direct DOM updates and window listeners
+  // Pointer drag using direct DOM updates and window listeners
   const handleCardPointerDown = (toolId: string, index: number, e: React.PointerEvent<HTMLDivElement>) => {
     e.stopPropagation();
 
@@ -215,123 +214,23 @@ export const FolderToolsInteraction: React.FC = () => {
 
   return (
     <div className="w-full flex flex-col items-center justify-center select-none overflow-visible">
-      {/* Mobile Tool Deck (Clean, touch-friendly, legible without awkward 3D clipping) */}
-      <div className="md:hidden w-full max-w-sm flex flex-col items-center px-1">
-        {/* Quick Tool Selector Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-1.5 mb-4">
-          {TOOLS.map((tool, idx) => {
-            const ToolIcon = tool.icon;
-            const isActive = mobileActiveTool === idx;
-            return (
-              <button
-                key={tool.id}
-                type="button"
-                onClick={() => setMobileActiveTool(idx)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
-                  isActive
-                    ? 'bg-white text-black shadow-md'
-                    : 'text-zinc-400 bg-white/[0.04] border border-white/[0.06] hover:text-white'
-                }`}
-              >
-                <span
-                  className="w-3.5 h-3.5 flex items-center justify-center"
-                  style={{ color: isActive ? '#000' : tool.accent }}
-                >
-                  <ToolIcon className="w-3 h-3" />
-                </span>
-                <span>{tool.title.split(' ')[0]}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Active Tool Card */}
-        {(() => {
-          const tool = TOOLS[mobileActiveTool];
-          const ToolIcon = tool.icon;
-          return (
-            <div
-              key={tool.id}
-              className="w-full rounded-2xl p-5 border border-white/[0.1] bg-[#0c0d12] shadow-xl flex flex-col justify-between min-h-[190px] transition-all duration-300"
-            >
-              <div>
-                <div className="flex items-center justify-between pb-3 border-b border-white/[0.08] mb-3">
-                  <div className="flex items-center gap-2.5">
-                    <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center border border-white/[0.08]"
-                      style={{ backgroundColor: `${tool.accent}15` }}
-                    >
-                      <ToolIcon className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-white tracking-tight">
-                        {tool.title}
-                      </h4>
-                      <p className="text-[11px] text-zinc-400 font-mono">
-                        {tool.subtitle}
-                      </p>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-mono text-zinc-500 px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">
-                    {tool.badge}
-                  </span>
-                </div>
-
-                <p className="text-xs text-zinc-300 leading-relaxed">
-                  {tool.description}
-                </p>
-              </div>
-
-              {/* Card Footer with Accent Dot */}
-              <div className="flex items-center justify-between pt-3 mt-3 border-t border-white/[0.06] text-[10px] font-mono">
-                <span className="text-zinc-500">
-                  {mobileActiveTool + 1} of {TOOLS.length} Tools
-                </span>
-                <div className="flex items-center gap-1.5">
-                  <span
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: tool.accent }}
-                  />
-                  <span className="text-zinc-400">{tool.title}</span>
-                </div>
-              </div>
-            </div>
-          );
-        })()}
-
-        {/* Mobile Pagination Dots */}
-        <div className="flex items-center justify-center gap-1.5 mt-3.5">
-          {TOOLS.map((_, idx) => (
-            <button
-              key={idx}
-              type="button"
-              onClick={() => setMobileActiveTool(idx)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                mobileActiveTool === idx ? 'w-6 bg-cyan-400' : 'w-1.5 bg-white/20'
-              }`}
-              aria-label={`Go to tool ${idx + 1}`}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Desktop 3D Folder Stage Container (Untouched on Desktop) */}
+      {/* Folder Stage Container with compact mobile proportions */}
       <div
-        className="hidden md:flex relative flex-col items-center justify-center transition-all duration-500"
+        className="relative flex flex-col items-center justify-center transition-all duration-500"
         style={{
           width: '100%',
           maxWidth: isOpen ? '920px' : '320px',
-          minHeight: isOpen ? '350px' : '224px',
+          minHeight: isOpen ? (isMobile ? '280px' : '350px') : (isMobile ? '190px' : '224px'),
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* The 3D Tactile Folder based on Framer FOLDER-xHIJ */}
+        {/* The 3D Tactile Folder */}
         <div
           className="relative flex items-center justify-center cursor-pointer"
           style={{
-            width: '292px',
-            height: '224px',
+            width: isMobile ? '265px' : '292px',
+            height: isMobile ? '195px' : '224px',
             perspective: '2000px',
             transformStyle: 'preserve-3d',
           }}
@@ -340,14 +239,14 @@ export const FolderToolsInteraction: React.FC = () => {
             toggleFolder();
           }}
         >
-          {/* 1. Folder Back Plate (framer-ikzj2x) */}
+          {/* 1. Folder Back Plate */}
           <div
-            className="absolute rounded-[24px] transition-all duration-500"
+            className="absolute rounded-[22px] sm:rounded-[24px] transition-all duration-500"
             style={{
               top: '0px',
               bottom: '0px',
-              left: '11px',
-              right: '11px',
+              left: isMobile ? '8px' : '11px',
+              right: isMobile ? '8px' : '11px',
               border: '2px solid rgb(36, 36, 36)',
               background:
                 'radial-gradient(67% 62% at 50% 0%, rgb(51, 51, 51) 0%, rgb(14, 14, 14) 100%)',
@@ -356,20 +255,20 @@ export const FolderToolsInteraction: React.FC = () => {
             }}
           >
             {/* Top Folder Tab Header */}
-            <div className="absolute -top-3.5 left-4 px-3 py-0.5 rounded-t-lg bg-[#242424] border-t border-x border-[#333] text-[10px] font-mono text-zinc-400 flex items-center gap-1.5">
+            <div className="absolute -top-3.5 left-4 px-2.5 sm:px-3 py-0.5 rounded-t-lg bg-[#242424] border-t border-x border-[#333] text-[9px] sm:text-[10px] font-mono text-zinc-400 flex items-center gap-1.5">
               <FolderIcon className="w-3 h-3 text-zinc-400" />
               <span>STACK // 05_TOOLS</span>
             </div>
           </div>
 
-          {/* 2. Movable Papers / Tool Cards Stack (framer-1pr61nj) */}
+          {/* 2. Movable Papers / Tool Cards Stack */}
           <div
             className="absolute transition-all duration-500"
             style={{
-              width: '246px',
-              height: '200px',
-              top: isOpen ? '-90px' : isHovered ? '-65px' : '-38px',
-              left: 'calc(50% - 123px)',
+              width: isMobile ? '216px' : '246px',
+              height: isMobile ? '165px' : '200px',
+              top: isOpen ? (isMobile ? '-60px' : '-90px') : isHovered ? '-50px' : (isMobile ? '-28px' : '-38px'),
+              left: isMobile ? 'calc(50% - 108px)' : 'calc(50% - 123px)',
               zIndex: 2,
             }}
           >
@@ -393,8 +292,8 @@ export const FolderToolsInteraction: React.FC = () => {
                     position: 'absolute',
                     top: 0,
                     left: 0,
-                    width: isMobile ? '210px' : '222px',
-                    height: '170px',
+                    width: isMobile ? '195px' : '222px',
+                    height: isMobile ? '150px' : '170px',
                     transform: `translate3d(${finalX}px, ${finalY}px, 0px) rotate(${finalRot}deg)`,
                     zIndex: 2 + index,
                     backgroundColor: '#0e1017',
@@ -402,35 +301,35 @@ export const FolderToolsInteraction: React.FC = () => {
                     transition: 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 250ms ease',
                     cursor: 'grab',
                   }}
-                  className="folder-tool-card rounded-[14px] p-4 flex flex-col justify-between border select-none border-white/[0.09] shadow-[2px_-2px_14px_rgba(0,0,0,0.55)] hover:border-white/30"
+                  className="folder-tool-card rounded-[13px] sm:rounded-[14px] p-3.5 sm:p-4 flex flex-col justify-between border select-none border-white/[0.09] shadow-[2px_-2px_14px_rgba(0,0,0,0.55)] hover:border-white/30"
                 >
                   {/* Card Header */}
                   <div>
-                    <div className="flex items-center justify-between pb-2 border-b border-white/[0.07] mb-2 pointer-events-none">
-                      <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-between pb-1.5 sm:pb-2 border-b border-white/[0.07] mb-1.5 sm:mb-2 pointer-events-none">
+                      <div className="flex items-center gap-1.5 sm:gap-2">
                         <div
-                          className="w-7 h-7 rounded-lg flex items-center justify-center border border-white/[0.08]"
+                          className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center border border-white/[0.08]"
                           style={{ backgroundColor: `${tool.accent}15` }}
                         >
-                          <ToolIcon className="w-3.5 h-3.5" />
+                          <ToolIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                         </div>
-                        <span className="text-xs font-semibold text-white tracking-tight">
+                        <span className="text-[11px] sm:text-xs font-semibold text-white tracking-tight">
                           {tool.title}
                         </span>
                       </div>
-                      <span className="text-[9px] font-mono text-zinc-500">
+                      <span className="text-[8px] sm:text-[9px] font-mono text-zinc-500">
                         {tool.badge}
                       </span>
                     </div>
 
-                    <p className="text-[10px] sm:text-[11px] text-zinc-400 leading-relaxed line-clamp-3 pointer-events-none">
+                    <p className="text-[9.5px] sm:text-[11px] text-zinc-400 leading-relaxed line-clamp-3 pointer-events-none">
                       {tool.description}
                     </p>
                   </div>
 
                   {/* Card Footer */}
-                  <div className="flex items-center justify-between pt-1.5 border-t border-white/[0.05] text-[9px] font-mono pointer-events-none">
-                    <span className="text-zinc-500 truncate max-w-[130px]">
+                  <div className="flex items-center justify-between pt-1 border-t border-white/[0.05] text-[8.5px] sm:text-[9px] font-mono pointer-events-none">
+                    <span className="text-zinc-500 truncate max-w-[110px] sm:max-w-[130px]">
                       {tool.subtitle}
                     </span>
                     <span
@@ -443,13 +342,13 @@ export const FolderToolsInteraction: React.FC = () => {
             })}
           </div>
 
-          {/* 3. Folder Front Flap with 3D Forward Tilt (framer-1chfr19) */}
+          {/* 3. Folder Front Flap with 3D Forward Tilt */}
           <div
-            className="absolute bottom-0 rounded-[24px] transition-all duration-500 overflow-hidden"
+            className="absolute bottom-0 rounded-[22px] sm:rounded-[24px] transition-all duration-500 overflow-hidden"
             style={{
-              left: 'calc(50% - 135px)',
-              width: '270px',
-              height: '224px',
+              left: isMobile ? 'calc(50% - 122px)' : 'calc(50% - 135px)',
+              width: isMobile ? '244px' : '270px',
+              height: isMobile ? '195px' : '224px',
               transformOrigin: 'bottom center',
               transformStyle: 'preserve-3d',
               transform: isOpen
@@ -467,7 +366,7 @@ export const FolderToolsInteraction: React.FC = () => {
               transition: 'transform 600ms cubic-bezier(0.23, 1, 0.32, 1)',
             }}
           >
-            {/* Frosted Front Glass Highlights (G5jKnnhXs & wiGsa9IR9) */}
+            {/* Frosted Front Glass Highlights */}
             <div
               className="absolute left-3 right-3 h-[1px]"
               style={{
@@ -486,6 +385,11 @@ export const FolderToolsInteraction: React.FC = () => {
             />
           </div>
         </div>
+
+        {/* Subtle mobile helper text */}
+        <p className="sm:hidden text-[10px] text-zinc-500 font-mono mt-2">
+          {isOpen ? 'Tap folder to close' : 'Tap folder to view stack'}
+        </p>
       </div>
     </div>
   );
